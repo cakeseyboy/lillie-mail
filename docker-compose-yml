@@ -9,25 +9,6 @@ services:
       - default
     restart: always
 
-  development:
-    image: mailu/setup:${DEVELOPMENT}
-    networks:
-      - web
-      - default
-    env_file: .env
-    environment:
-      stable_version: ${STABLE}
-      this_version: ${DEVELOPMENT}
-      VERSIONS: ${STABLE},${DEVELOPMENT}
-    labels:
-      - traefik.enable=true
-      - traefik.port=80
-      - traefik.docker.network=web
-      - traefik.main.frontend.rule=Host:${ADDRESS};PathPrefix:/${DEVELOPMENT}
-    depends_on:
-      - redis
-    restart: always
-
   stable:
     image: mailu/setup:${STABLE}
     networks:
